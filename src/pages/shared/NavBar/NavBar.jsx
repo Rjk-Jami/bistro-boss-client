@@ -5,8 +5,8 @@ const NavBar = () => {
         <Link to="/">Home</Link>
         <Link to="/" className="">Contract Us</Link>
         <Link to="/">DashBoard</Link>
-        <Link to="/">Order Menu</Link>
-        <Link to="/">Order Shop</Link>
+        <Link to="/menu">Our Menu</Link>
+        <Link to="/order/salad">Our Shop</Link>
         
         
     </>
@@ -29,7 +29,7 @@ const NavBar = () => {
                     {navbar}
                     
                 </ul>
-                <Link className="font-semibold mx-4">Sign in</Link>
+                <Link to="/login" className="font-semibold mx-4">Sign in</Link>
             </div>
             
         </div>
