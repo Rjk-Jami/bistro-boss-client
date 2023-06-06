@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import loginImg from '../../assets/others/authentication1.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
-import { AuthContext } from '../../provider/AuthProvider/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Swal from 'sweetalert2'
+import useAuth from '../../components/hooks/useAuth';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ const Login = () => {
         createUser,
         login,
         logOut,
-        googleLogin } = useContext(AuthContext)
+        googleLogin } = useAuth()
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -43,15 +43,7 @@ const Login = () => {
             .then(result => {
                 const loggedUser = result.user
                 console.log(loggedUser)
-                // Swal.fire({
-                //     title: 'Custom animation with Animate.css',
-                //     showClass: {
-                //         popup: 'animate__animated animate__fadeInDown'
-                //     },
-                //     hideClass: {
-                //         popup: 'animate__animated animate__fadeOutUp'
-                //     }
-                // })
+              
                 Swal.fire({
                     position: 'top',
                     icon: 'success',
@@ -68,15 +60,7 @@ const Login = () => {
             .then(result => {
                 const loggedUser = result.user
 
-                // Swal.fire({
-                //     title: 'Custom animation with Animate.css',
-                //     showClass: {
-                //         popup: 'animate__animated animate__fadeInDown'
-                //     },
-                //     hideClass: {
-                //         popup: 'animate__animated animate__fadeOutUp'
-                //     }
-                // })
+                
                 const savedUser = { name: loggedUser.displayName, email:loggedUser.email, photo:loggedUser?.photoURL}
 
                 fetch('http://localhost:5000/users', {
@@ -100,14 +84,6 @@ const Login = () => {
                                 
                             })
                             navigate(from, { replace: true });
-                // Swal.fire({
-                //     position: 'top',
-                //     icon: 'success',
-                //     title: 'Successfully Logged in',
-                //     showConfirmButton: false,
-                //     timer: 1500
-                //   })
-                //   navigate(from, {replace:true});
 
             })
             .catch(error => console.log(error))
@@ -152,7 +128,7 @@ const Login = () => {
                                     <input onBlur={handleValidateCaptcha} type="text" name='captcha' placeholder="Type the above captcha " className="input input-bordered" />
 
                                 </div>
-                                {/* have to make dynamic button for captcha */}
+                                {/*TODO : have to make dynamic button for captcha */}
                                 <div className="form-control mt-6">
                                     <button disabled={false} className="btn btn-primary">Login</button>
                                 </div>

@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { AuthContext } from '../../provider/AuthProvider/AuthProvider';
 import { useForm } from "react-hook-form";
 import loginImg from '../../assets/others/authentication1.png'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Swal from 'sweetalert2'
+import useAuth from '../../components/hooks/useAuth';
 
 const SignUp = () => {
 
@@ -20,7 +20,7 @@ const SignUp = () => {
         login,
         logOut,
         googleLogin,
-        updateUserProfile } = useContext(AuthContext)
+        updateUserProfile } = useAuth()
 
     const onSubmit = data => {
 

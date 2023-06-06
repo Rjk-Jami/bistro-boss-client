@@ -3,6 +3,7 @@ import React, { createContext, useEffect, useState } from 'react';
 export const AuthContext = createContext(null)
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
 import { app } from '../../firebase/firebase.config';
+import axios from 'axios';
 
 
 const auth = getAuth(app);
@@ -36,13 +37,36 @@ const googleLogin = ()=>{
 useEffect(()=>{
     const unsubscribe =  onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
+
+            //get and set token - JWT
+            // fetch('', {
+            //     method:"POST"
+            // })
+
+            if(currentUser){
+                axios.post('http://localhost:5000/jwt', {email : currentUser.email})
+                .then(data=>{
+                    // console.log(data.data)
+                    // user thakle set korbe
+                    // console.log(data)
+                    localStorage.setItem('access-token' , data.data.token)
+
+                })
+
+            }
+            else{
+                //user na thakle remove
+                localStorage.removeItem("access-token")
+            }
+
+
             setLoading(false)
 })
     return ()=>{
         setLoading(true)
        return unsubscribe();
     }
-},[])
+},[ ])
 
 const updateUserProfile = (name, photo)=>{
     return updateProfile(auth.currentUser, {

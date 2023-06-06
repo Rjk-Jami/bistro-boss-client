@@ -1,13 +1,15 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../provider/AuthProvider/AuthProvider";
 import { FaShoppingCart } from 'react-icons/fa';
 import useCart from "../../../components/hooks/useCart";
+import useAuth from "../../../components/hooks/useAuth";
+import useAdmin from "../../../components/hooks/useAdmin";
 
 const NavBar = () => {
-    const { user, logOut } = useContext(AuthContext)
-    const [cart] = useCart()
+    const { user, logOut } = useAuth()
+    const [cart, refetch] = useCart()
     console.log(user)
+    const [isAdmin] =useAdmin()
+
     const handleLogOut = () => {
         logOut()
 
@@ -15,7 +17,7 @@ const NavBar = () => {
     const navbar = <>
         <Link to="/">Home</Link>
         <Link to="/" className="">Contract Us</Link>
-        <Link to="/">DashBoard</Link>
+        <Link to={ isAdmin ? '/dashboard/adminhome' : '/dashboard/userhome'}>DashBoard</Link>
         <Link to="/menu">Our Menu</Link>
         <Link to="/order/salad">Our Shop</Link>
         <Link to="dashboard/mycart">
