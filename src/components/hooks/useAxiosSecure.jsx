@@ -5,7 +5,7 @@ import { AuthContext } from '../../provider/AuthProvider/AuthProvider';
 import useAuth from './useAuth';
 
 const axiosSecure = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://bistro-boss-server-rjk-jami.vercel.app',
 });
 
 const useAxiosSecure = () => {

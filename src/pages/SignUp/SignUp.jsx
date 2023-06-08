@@ -15,11 +15,9 @@ const SignUp = () => {
     const from = location.state?.from?.pathname || "/";
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
     const { user,
-        loading,
+     
         createUser,
-        login,
-        logOut,
-        googleLogin,
+      
         updateUserProfile } = useAuth()
 
     const onSubmit = data => {
@@ -32,7 +30,7 @@ const SignUp = () => {
                 updateUserProfile(data.name, data.photo)
                     .then(result => {
                         const savedUser = { name: data.name, email:data.email, photo:data.photo}
-                        fetch('http://localhost:5000/users', {
+                        fetch('https://bistro-boss-server-rjk-jami.vercel.app/users', {
                         method:"POST",
                         headers:{
                             'content-type': "application/json"
@@ -110,7 +108,7 @@ const SignUp = () => {
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
-                                    <input placeholder="Password" className="input input-bordered" type='password' {...register("password", { required: true, minLength: 6, maxLength: 20, pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{6}/ })} />
+                                    <input placeholder="Password" className="input input-bordered" type='password' {...register("password", { required: true, minLength: 6, maxLength: 20, pattern: /(?=.*[A-Z])(?=.*[!@#$&*]).{6}/ })} />
                                     {errors.password && <span className='text-red-600'>This field is required</span>}
                                     {errors.password?.type === "minLength" && <span className='text-red-600'>password must be 6 characters</span>}
                                     {errors.password?.type === "maxLength" && <span className='text-red-600'>password  not more than 20 characters</span>}

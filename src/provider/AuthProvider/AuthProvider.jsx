@@ -44,7 +44,7 @@ useEffect(()=>{
             // })
 
             if(currentUser){
-                axios.post('http://localhost:5000/jwt', {email : currentUser.email})
+                axios.post('https://bistro-boss-server-rjk-jami.vercel.app/jwt', {email : currentUser.email})
                 .then(data=>{
                     // console.log(data.data)
                     // user thakle set korbe

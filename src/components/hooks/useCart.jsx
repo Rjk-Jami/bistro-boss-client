@@ -11,7 +11,7 @@
 //     const {  refetch,  data: cart = []  } = useQuery({
 //         queryKey: ['carts', user?.email],
 //         // queryFn: async () => {
-//         //     const response = await fetch(`http://localhost:5000/carts?email=${user?.email}`, {headers:{authorization: `bearer ${token}`}})
+//         //     const response = await fetch(`https://bistro-boss-server-rjk-jami.vercel.app/carts?email=${user?.email}`, {headers:{authorization: `bearer ${token}`}})
 //         //     if (!response.ok) {
 //         //       throw new Error('Network response was not ok')
 //         //     }
@@ -59,7 +59,7 @@ const useCart = () => {
 export default useCart;
 
   // queryFn: async () => {
-        //     const res = await fetch(`http://localhost:5000/carts?email=${user?.email}`, { headers: {
+        //     const res = await fetch(`https://bistro-boss-server-rjk-jami.vercel.app/carts?email=${user?.email}`, { headers: {
         //         authorization: `bearer ${token}`
         //     }})
         //     return res.json();

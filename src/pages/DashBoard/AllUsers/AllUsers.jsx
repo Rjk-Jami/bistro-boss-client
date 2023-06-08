@@ -8,7 +8,7 @@ import useAxiosSecure from '../../../components/hooks/useAxiosSecure';
 const AllUsers = () => {
     const [axiosSecure] = useAxiosSecure()
     const { data: users = [], refetch } = useQuery(['users'], async () => {
-        // const res = await fetch('http://localhost:5000/users')
+        // const res = await fetch('https://bistro-boss-server-rjk-jami.vercel.app/users')
         // return res.json();
         const  res = await axiosSecure.get("/users")
         return res.data;
@@ -19,7 +19,7 @@ const AllUsers = () => {
     }
 
     const handleMakeAdmin = (user) =>{
-        fetch(`http://localhost:5000/users/admin/${user._id}`,{
+        fetch(`https://bistro-boss-server-rjk-jami.vercel.app/users/admin/${user._id}`,{
             method:"PATCH"
         })
         .then(res=>res.json())
@@ -37,7 +37,7 @@ const AllUsers = () => {
         })
     }
     const handleMakeUser = (user) =>{
-        fetch(`http://localhost:5000/users/user/${user._id}`,{
+        fetch(`https://bistro-boss-server-rjk-jami.vercel.app/users/user/${user._id}`,{
             method:"PATCH"
         })
         .then(res=>res.json())
